@@ -39,7 +39,10 @@ module Precious
     end
 
     get '/' do
-      show_page_or_file('Home')
+      wiki = Gollum::Wiki.new(settings.gollum_path, settings.wiki_options)
+      @results = wiki.pages
+      @ref = wiki.ref
+      mustache :pages
     end
 
     get '/edit/*' do
@@ -178,23 +181,24 @@ module Precious
       mustache :pages
     end
 
-    get '/*' do
+    get '/page/*' do
+	  "Hello #{params[:splat].first}"
       show_page_or_file(params[:splat].first)
     end
 
-    def show_page_or_file(name)
+	def show_page_or_file(path)
       wiki = Gollum::Wiki.new(settings.gollum_path, settings.wiki_options)
-      if page = wiki.page(name)
+      if page = wiki.page(path)
         @page = page
-        @name = name
+        @name = path
         @content = page.formatted_data
         @editable = true
         mustache :page
-      elsif file = wiki.file(name)
+      elsif file = wiki.file(path)
         content_type file.mime_type
         file.raw_data
       else
-        @name = name
+        @name = path 
         mustache :create
       end
     end
