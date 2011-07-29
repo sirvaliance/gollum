@@ -69,9 +69,9 @@ module Precious
       update_wiki_page(wiki, page.footer,  params[:footer],  commit) if params[:footer]
       update_wiki_page(wiki, page.sidebar, params[:sidebar], commit) if params[:sidebar]
       committer.commit
-	  puts `./.git/hooks/post-commit`
+	  `./.git/hooks/post-commit`
 
-      #redirect "/page/#{CGI.escape(page.path)}"
+      redirect "/page/#{CGI.escape(page.path)}"
     end
 
     post '/create' do
