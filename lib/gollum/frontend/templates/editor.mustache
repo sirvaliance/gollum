@@ -10,6 +10,13 @@
   <div id="gollum-editor-title-field" class="singleline">
     <label for="page" class="jaws">Page Title</label>
     <input type="text" name="page" id="gollum-editor-page-title" value="{{page_name}}">
+	<select name="path" id="gollum-editor-page-path">
+		<option value="0">Root</option>
+		<option value="1">/docs/</option>
+		<option value="2">/interact/</option>
+		<option value="3">/projects/</option>
+		<option value="4">/help/</option>
+	</select>
   </div>
   {{/is_create_page}}
   {{#is_edit_page}}

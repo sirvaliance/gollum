@@ -73,16 +73,23 @@ module Precious
 
       redirect "/page/#{CGI.escape(page.path)}"
     end
+	
+	get '/create/*' do
+		@name = params[:splat].first
+        mustache :create
+	end 
 
     post '/create' do
       name = params[:page]
+	  allowed_paths = ['/md/', '/md/docs/', '/md/interact/', '/md/projects/', '/md/help/']
+	  path = allowed_paths[params[:path].to_i]
       wiki = Gollum::Wiki.new(settings.gollum_path, settings.wiki_options)
 
       format = params[:format].intern
 
       begin
-        wiki.write_page(name, format, params[:content], commit_message)
-        redirect "/page/#{CGI.escape(name)}"
+        wiki.write_page(name, format, params[:content], commit_message, path)
+        redirect "/pages"
       rescue Gollum::DuplicatePageError => e
         @message = "Duplicate page: #{e.message}"
         mustache :error

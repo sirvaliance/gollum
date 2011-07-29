@@ -221,7 +221,7 @@ module Gollum
     #
     # Returns the String SHA1 of the newly written version, or the 
     # Gollum::Committer instance if this is part of a batch update.
-    def write_page(name, format, data, commit = {})
+    def write_page(name, format, data, commit = {}, path = '')
       multi_commit = false
 
       committer = if obj = commit[:committer]
@@ -231,11 +231,11 @@ module Gollum
         Committer.new(self, commit)
       end
 
-      committer.add_to_index('', name, format, data)
+      committer.add_to_index(path, name, format, data)
 
       committer.after_commit do |index, sha|
         @access.refresh
-        index.update_working_dir('', name, format)
+        index.update_working_dir(path, name, format)
       end
 
       multi_commit ? committer : committer.commit
