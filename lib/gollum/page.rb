@@ -318,7 +318,6 @@ module Gollum
       end
 
       map.each do |entry|
-	    puts entry.name
         next if entry.name.to_s.empty?
         next unless checked_dir.nil? || entry.dir.downcase == checked_dir
         next unless name == entry.path
