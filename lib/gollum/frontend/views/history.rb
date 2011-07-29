@@ -7,6 +7,10 @@ module Precious
         @page.title
       end
 
+	  def page_path
+		"#{@page.path}"	
+	  end
+
       def versions
         i = @versions.size + 1
         @versions.map do |v|

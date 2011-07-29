@@ -9,6 +9,10 @@ module Precious
         "#{@page.title}"
       end
 
+	  def page_path
+		"#{@page.path}"
+      end
+
       def page_name
         @name.gsub('-', ' ')
       end

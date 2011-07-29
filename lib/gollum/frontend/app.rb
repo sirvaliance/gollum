@@ -117,8 +117,8 @@ module Precious
       mustache :page
     end
 
-    get '/history/:name' do
-      @name     = params[:name]
+    get '/history/*' do
+      @name     = params[:splat].first
       wiki      = Gollum::Wiki.new(settings.gollum_path, settings.wiki_options)
       @page     = wiki.page(@name)
       @page_num = [params[:page].to_i, 1].max
