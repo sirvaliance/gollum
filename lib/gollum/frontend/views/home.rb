@@ -1,6 +1,6 @@
 module Precious
   module Views
-    class Pages < Layout
+    class Home < Layout
       attr_reader :results, :ref
 
       def title
