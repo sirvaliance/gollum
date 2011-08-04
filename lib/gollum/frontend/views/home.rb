@@ -1,11 +1,15 @@
 module Precious
   module Views
     class Home < Layout
-      attr_reader :results, :ref
+      attr_reader :results, :ref, :page, :content
 
       def title
-        "The Crypto Project Wiki"
+		@page.title
       end
+
+	  def format
+		@page.format
+	  end
 
       def has_results
         !@results.empty?

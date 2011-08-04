@@ -1,14 +1,24 @@
 <div id="wiki-wrapper" class="results">
 <div id="head">
-  <h1>{{title}}</h1>
+  <h1>Home</h1>
   <ul class="actions">
     <li class="minibutton"><a href="/"
        class="action-edit-page">Home</a></li>
   </ul>
   {{>searchbar}}
 </div>
-<div id="results">
+<div id="wiki-content">
+<div class="wrap {{#has_footer}} has-footer {{/has_footer}} {{#has_sidebar}}  has-rightbar{{/has_sidebar}}">
+  <div id="wiki-body" class="gollum-{{format}}-content">
+    <div id="template">
+      {{{content}}}
+    </div>
+  </div>
+</div>
+</div>
 
+<div id="results">
+<h2>List of All Current Pages</h2>
 {{#has_results}}
   <ul>
     {{#results}}

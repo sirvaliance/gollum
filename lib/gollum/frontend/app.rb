@@ -40,6 +40,11 @@ module Precious
 
     get '/' do
       wiki = Gollum::Wiki.new(settings.gollum_path, settings.wiki_options)
+      if page = wiki.page('wiki-home.md')
+        @page = page
+		@content = page.formatted_data
+		puts page.formatted_data
+	  end
       @results = wiki.pages
       @ref = wiki.ref
       mustache :home
@@ -190,7 +195,6 @@ module Precious
     end
 
     get '/page/*' do
-	  "Hello #{params[:splat].first}"
       show_page_or_file(params[:splat].first)
     end
 
