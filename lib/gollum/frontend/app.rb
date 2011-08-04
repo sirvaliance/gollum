@@ -42,7 +42,7 @@ module Precious
       wiki = Gollum::Wiki.new(settings.gollum_path, settings.wiki_options)
       @results = wiki.pages
       @ref = wiki.ref
-      mustache :pages
+      mustache :home
     end
 
     get '/edit/*' do
@@ -89,7 +89,7 @@ module Precious
 
       begin
         wiki.write_page(name, format, params[:content], commit_message, path)
-        redirect "/pages"
+        redirect "/page#{path}#{CGI.escape(name)}.md"
       rescue Gollum::DuplicatePageError => e
         @message = "Duplicate page: #{e.message}"
         mustache :error
