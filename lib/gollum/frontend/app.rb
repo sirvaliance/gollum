@@ -86,7 +86,7 @@ module Precious
 
     post '/create' do
       name = params[:page]
-	  allowed_paths = ['/md/', '/md/docs/', '/md/interact/', '/md/projects/', '/md/help/']
+	  allowed_paths = ['/md/', '/md/docs/', '/md/interact/', '/md/projects/', '/md/help/', '/md/guides/']
 	  path = allowed_paths[params[:path].to_i]
       wiki = Gollum::Wiki.new(settings.gollum_path, settings.wiki_options)
 
